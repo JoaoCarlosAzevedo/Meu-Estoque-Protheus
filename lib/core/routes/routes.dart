@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:meuestoque_protheus/pages/home/home_page.dart';
 
 class AppRouter {
   /*
   late MachinesRepository machinesRepository;
   late MachinesCubit machinesCubit;
- */ 
-   AppRouter() {
+ */
+  AppRouter() {
 /*     machinesRepository =
         MachinesRepository(repository: MachinesNetworkService());
     machinesCubit = MachinesCubit(repository: machinesRepository); */
-  } 
-  
+  }
+
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case "/":
-        return MaterialPageRoute(builder: (context) => const Text("Hello"));
-        /* MaterialPageRoute(
+        return MaterialPageRoute(builder: (context) => const HomePage());
+      /* MaterialPageRoute(
           builder: (_) => BlocProvider.value(
             value: machinesCubit,
             child: MachinesPage(),
           ),
         ); */
       default:
-        return MaterialPageRoute(builder: (context) => const DefaultErrorPage());
+        return MaterialPageRoute(
+            builder: (context) => const DefaultErrorPage());
     }
   }
 }
@@ -39,4 +41,3 @@ class DefaultErrorPage extends StatelessWidget {
     );
   }
 }
- 

@@ -1,5 +1,5 @@
+import 'package:meuestoque_protheus/features/stock_location/data/epc_location_service.dart';
 import 'package:meuestoque_protheus/features/stock_location/model/epc_locations_model.dart';
-import 'epc_location_service.dart';
 
 class EpcLocationRepository {
   final LocationNetworkService service;
