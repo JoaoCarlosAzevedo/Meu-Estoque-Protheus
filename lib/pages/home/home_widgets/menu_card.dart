@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/models/menu_model.dart';
+import 'package:meuestoque_protheus/pages/home/epc_coletor/epc_coletor_page.dart';
 
 class MenuCard extends StatelessWidget {
   const MenuCard({Key? key, required this.info}) : super(key: key);
@@ -12,7 +13,8 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(info.title);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const EpcColetor()));
       },
       child: Container(
         padding: const EdgeInsets.all(defaultPadding),
@@ -32,7 +34,7 @@ class MenuCard extends StatelessWidget {
                   height: 45,
                   width: 45,
                   decoration: BoxDecoration(
-                    color: info.color!.withOpacity(0.1),
+                    color: bgColor.withOpacity(1.0),
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
                   //child: const Icon(Icons.access_alarm),
@@ -46,25 +48,25 @@ class MenuCard extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            Row(
+            /* Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                /*        Text(
+                Text(
                   "${info.numOfFiles} Files",
                   style: Theme.of(context)
                       .textTheme
                       .caption!
                       .copyWith(color: Colors.white70),
-                ), */
-/*                 Text(
+                ),
+                Text(
                   info.totalStorage!,
                   style: Theme.of(context)
                       .textTheme
                       .caption!
                       .copyWith(color: Colors.white),
-                ), */
+                ),
               ],
-            )
+            ) */
           ],
         ),
       ),

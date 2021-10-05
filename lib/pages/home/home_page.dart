@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/models/menu_model.dart';
 import 'package:meuestoque_protheus/pages/home/home_widgets/menu_card.dart';
@@ -13,8 +14,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
+    return Scaffold(
+      appBar: AppBar(
+        //leading: const Icon(FontAwesomeIcons.dollyFlatbed),
+        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Icon(FontAwesomeIcons.dollyFlatbed),
+            SizedBox(width: 20),
+            Text("Meu Estoque"),
+          ],
+        ),
+        elevation: 0,
+        backgroundColor: bgColor,
+      ),
+      body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(defaultPadding),
           child: MenuGridView(),
