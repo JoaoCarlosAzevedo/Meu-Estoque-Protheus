@@ -1,13 +1,18 @@
 import 'dart:convert';
 
+import 'package:objectbox/objectbox.dart';
+
+@Entity()
 class EpcLocation {
+  int id;
   String armazem;
-  int rua;
+  String rua;
   String coluna;
   List<String> epcs;
 
   EpcLocation(
-      {required this.armazem,
+      {this.id = 0,
+      required this.armazem,
       required this.rua,
       required this.coluna,
       required this.epcs});
