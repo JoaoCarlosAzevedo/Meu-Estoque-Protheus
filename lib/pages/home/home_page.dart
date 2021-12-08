@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
-import 'package:meuestoque_protheus/core/models/menu_model.dart';
 import 'package:meuestoque_protheus/pages/home/home_widgets/menu_card.dart';
 
 class HomePage extends StatefulWidget {

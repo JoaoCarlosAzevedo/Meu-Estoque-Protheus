@@ -4,7 +4,7 @@ class AppColors {
   static const primary = Color(0xFFFF941A);
   static const grey = Color(0xFF585666);
   static const delete = Color(0xFF585666);
-  static const heading = Color(0xFF585666);
+  static const heading = Colors.white;
   static const body = Color(0xFF706E7A);
   static const input = Color(0xFFB1B0B8);
   static const stroke = Color(0xFFE3E3E6);

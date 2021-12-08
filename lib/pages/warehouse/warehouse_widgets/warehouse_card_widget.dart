@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
-import 'package:meuestoque_protheus/core/models/menu_model.dart';
-import 'package:meuestoque_protheus/pages/warehouse/warehouse_page.dart';
-//import 'package:meuestoque_protheus/pages/home/epc_coletor/epc_coletor_page.dart';
+import 'package:meuestoque_protheus/core/models/warehouses.dart';
 
-class MenuCard extends StatelessWidget {
-  const MenuCard({Key? key, required this.info}) : super(key: key);
+import 'warehouse_form_widget.dart';
 
-  final MenuItem info;
+class WareHouseCard extends StatelessWidget {
+  const WareHouseCard({Key? key, required this.info}) : super(key: key);
+
+  final Warehouse info;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const WarehousePage()));
+            MaterialPageRoute(builder: (context) => WarehouseForm(info: info)));
       },
       child: Container(
         padding: const EdgeInsets.all(defaultPadding),
@@ -39,35 +39,35 @@ class MenuCard extends StatelessWidget {
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
                   //child: const Icon(Icons.access_alarm),
-                  child: Center(child: FaIcon(info.icon)),
+                  child: const Center(child: FaIcon(FontAwesomeIcons.boxes)),
                 ),
                 //const Icon(Icons.more_vert, color: Colors.white54)
               ],
             ),
             Text(
-              info.title!,
+              info.warehouseName,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            /* Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "${info.numOfFiles} Files",
+                  "${info.streets.length} Ruas",
                   style: Theme.of(context)
                       .textTheme
                       .caption!
                       .copyWith(color: Colors.white70),
                 ),
                 Text(
-                  info.totalStorage!,
+                  "${info.shelf.length}",
                   style: Theme.of(context)
                       .textTheme
                       .caption!
                       .copyWith(color: Colors.white),
                 ),
               ],
-            ) */
+            )
           ],
         ),
       ),

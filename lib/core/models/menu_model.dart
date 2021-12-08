@@ -18,38 +18,3 @@ class MenuItem {
     this.color,
   });
 }
-
-List menuItens = [
-  MenuItem(
-    title: "Saldos",
-    numOfFiles: 1328,
-    icon: FontAwesomeIcons.clipboardList,
-    totalStorage: "1GB",
-    color: const Color(0xFFA4CDFF),
-    percentage: 10,
-  ),
-  MenuItem(
-    title: "Consultar Endereços",
-    numOfFiles: 5328,
-    icon: FontAwesomeIcons.dolly,
-    totalStorage: "7.3GB",
-    color: const Color(0xFF007EE5),
-    percentage: 78,
-  ),
-  MenuItem(
-    title: "Endereçar RFID",
-    numOfFiles: 1328,
-    icon: FontAwesomeIcons.warehouse,
-    totalStorage: "1.9GB",
-    color: primaryColor,
-    percentage: 35,
-  ),
-  MenuItem(
-    title: "Invetário RFID",
-    numOfFiles: 1328,
-    icon: FontAwesomeIcons.clipboardCheck,
-    totalStorage: "2.9GB",
-    color: const Color(0xFFFFA113),
-    percentage: 35,
-  ),
-];
