@@ -72,18 +72,20 @@ class _WarehouseFormState extends State<WarehouseForm> {
   }
 
   void handleSubmmit() {
-    EpcLocation epcLocation = _store.box<EpcLocation>().get(id)!;
+    if (id == -1) {
+      EpcLocation location = EpcLocation(
+          armazem: widget.info.warehouseName,
+          coluna: shelfController.text,
+          rua: streetController.text,
+          epcs: widget.aEpcs);
+      _store.box<EpcLocation>().put(location);
+    } else {
+      EpcLocation epcLocation = _store.box<EpcLocation>().get(id)!;
 
-    epcLocation.epcs = widget.aEpcs;
+      epcLocation.epcs = widget.aEpcs;
 
-    _store.box<EpcLocation>().put(epcLocation);
-
-/*     EpcLocation location = EpcLocation(
-        armazem: widget.info.warehouseName,
-        coluna: shelfController.text,
-        rua: streetController.text,
-        epcs: widget.aEpcs);
-    _store.box<EpcLocation>().put(location); */
+      _store.box<EpcLocation>().put(epcLocation);
+    }
   }
 
   @override
@@ -190,13 +192,15 @@ class _WarehouseFormState extends State<WarehouseForm> {
                     child: StreamBuilder<EpcLocation?>(
                         stream: _stream,
                         builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
+                          /*       if (!snapshot.hasData) {
                             return const Center(
                               child: CircularProgressIndicator(),
                             );
-                          }
+                          } */
 
-                          widget.aEpcs = snapshot.data!.epcs;
+                          widget.aEpcs = snapshot.hasData
+                              ? snapshot.data!.epcs
+                              : widget.aEpcs;
 
                           return ListView.builder(
                               itemCount: widget.aEpcs.length,
