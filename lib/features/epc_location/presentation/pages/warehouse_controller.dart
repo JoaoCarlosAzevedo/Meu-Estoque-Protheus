@@ -21,8 +21,9 @@ class WarehousePageController {
             EpcLocation_.coluna.equals(shelf))
         .watch(triggerImmediately: true)
         .map((query) {
-      id = query.findFirst()!.id;
-      print("o id: ${id.toString()}");
+      //id = query.findFirst()!.id;
+
+      id = query.findFirst()?.id ?? -1;
 
       return query.findFirst();
     });

@@ -21,8 +21,6 @@ class WarehouseForm extends StatefulWidget {
 class _WarehouseFormState extends State<WarehouseForm> {
   final TextEditingController _controller = TextEditingController();
 
-  // late Store _store;
-
   bool hasBeenInitilized = false;
 
   final streetController = TextEditingController();
@@ -44,13 +42,18 @@ class _WarehouseFormState extends State<WarehouseForm> {
       warehousePageController.searchEpcLocation(widget.info.warehouseName,
           streetController.text, shelfController.text);
     });
+
+    streetController.addListener(_listener);
+    shelfController.addListener(_listener);
   }
 
-  /*  @override
-  void dispose() {
-    _store.close();
-    super.dispose();
-  } */
+  void _listener() {
+    setState(() {
+      widget.aEpcs.clear();
+      warehousePageController.searchEpcLocation(widget.info.warehouseName,
+          streetController.text, shelfController.text);
+    });
+  }
 
   void handleSubmmit() {
     if (warehousePageController.id == -1) {
