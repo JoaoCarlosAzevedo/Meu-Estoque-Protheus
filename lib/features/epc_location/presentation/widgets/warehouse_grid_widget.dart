@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
-import 'package:meuestoque_protheus/pages/warehouse/warehouse_widgets/warehouse_card_widget.dart';
+import 'package:meuestoque_protheus/features/epc_location/presentation/widgets/warehouse_card_widget.dart';
 
 class WarehousesGrid extends StatelessWidget {
   const WarehousesGrid({

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/models/warehouses.dart';
-import 'package:meuestoque_protheus/features/stock_location/model/epc_locations_model.dart';
+import 'package:meuestoque_protheus/features/epc_location/model/epc_locations_model.dart';
+import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse_controller.dart';
+import 'package:meuestoque_protheus/features/epc_location/presentation/widgets/shelf_radio.dart';
+import 'package:meuestoque_protheus/features/epc_location/presentation/widgets/streetlist_dropdown.dart';
 import 'package:meuestoque_protheus/objectbox.g.dart';
-import 'package:meuestoque_protheus/pages/warehouse/warehouse_widgets/shelf_radio.dart';
-import 'package:meuestoque_protheus/pages/warehouse/warehouse_widgets/streetlist_dropdown.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
@@ -20,11 +21,7 @@ class WarehouseForm extends StatefulWidget {
 class _WarehouseFormState extends State<WarehouseForm> {
   final TextEditingController _controller = TextEditingController();
 
-  late Store _store;
-
-  late Stream<EpcLocation?> _stream;
-
-  int id = -1;
+  // late Store _store;
 
   bool hasBeenInitilized = false;
 
@@ -32,59 +29,44 @@ class _WarehouseFormState extends State<WarehouseForm> {
 
   final shelfController = TextEditingController();
 
+  final warehousePageController = WarehousePageController();
+
   @override
   void initState() {
     super.initState();
-    getApplicationDocumentsDirectory().then((dir) {
-      _store =
-          Store(getObjectBoxModel(), directory: join(dir.path, 'objectbox'));
 
-      setState(() {
-        hasBeenInitilized = true;
+    setState(() {
+      hasBeenInitilized = true;
 
-        streetController.text = widget.info.streets.first;
-        shelfController.text = widget.info.shelf.first;
+      streetController.text = widget.info.streets.first;
+      shelfController.text = widget.info.shelf.first;
 
-        _stream = _store
-            .box<EpcLocation>()
-            // The simplest possible query that just gets ALL the data out of the Box
-            .query(EpcLocation_.armazem.equals(widget.info.warehouseName) &
-                EpcLocation_.rua.equals(streetController.text) &
-                EpcLocation_.coluna.equals(shelfController.text))
-            .watch(triggerImmediately: true)
-            // Watching the query produces a Stream<Query<ShopOrder>>
-            // To get the actual data inside a List<ShopOrder>, we need to call find() on the query
-            .map((query) {
-          id = query.findFirst()!.id;
-
-          print("o id: ${id.toString()}");
-
-          return query.findFirst();
-        });
-      });
+      warehousePageController.searchEpcLocation(widget.info.warehouseName,
+          streetController.text, shelfController.text);
     });
   }
 
-  @override
+  /*  @override
   void dispose() {
     _store.close();
     super.dispose();
-  }
+  } */
 
   void handleSubmmit() {
-    if (id == -1) {
+    if (warehousePageController.id == -1) {
       EpcLocation location = EpcLocation(
           armazem: widget.info.warehouseName,
           coluna: shelfController.text,
           rua: streetController.text,
           epcs: widget.aEpcs);
-      _store.box<EpcLocation>().put(location);
+      warehousePageController.addEpcLocation(location);
     } else {
-      EpcLocation epcLocation = _store.box<EpcLocation>().get(id)!;
+      EpcLocation epcLocation =
+          warehousePageController.box.get(warehousePageController.id)!;
 
       epcLocation.epcs = widget.aEpcs;
 
-      _store.box<EpcLocation>().put(epcLocation);
+      warehousePageController.box.put(epcLocation);
     }
   }
 
@@ -190,7 +172,7 @@ class _WarehouseFormState extends State<WarehouseForm> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 1.0),
                     child: StreamBuilder<EpcLocation?>(
-                        stream: _stream,
+                        stream: warehousePageController.stream,
                         builder: (context, snapshot) {
                           /*       if (!snapshot.hasData) {
                             return const Center(
