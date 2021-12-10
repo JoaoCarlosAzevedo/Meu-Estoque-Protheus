@@ -66,16 +66,16 @@ class _WarehoueSyncPageState extends State<WarehoueSyncPage> {
                           style: TextStyles.titleListTile,
                         ),
                         Text(
-                          "Rua: " + snapshot.data![index]!.rua,
+                          "Rua: ${snapshot.data![index]!.rua} ${snapshot.data![index]!.coluna}",
                           style: TextStyles.trailingBold,
                         ),
                       ],
                     ),
                     //leading: const Icon(Icons.qr_code_2),
                     subtitle: Text(
-                      "EPCs: " + snapshot.data![index]!.epcs.length.toString(),
-                      style: TextStyles.trailingBold,
-                    ),
+                        "EPCs: " +
+                            snapshot.data![index]!.epcs.length.toString(),
+                        style: TextStyles.trailingRegular),
                     visualDensity: VisualDensity.compact,
                     trailing: IconButton(
                       icon: const Icon(Icons.refresh),

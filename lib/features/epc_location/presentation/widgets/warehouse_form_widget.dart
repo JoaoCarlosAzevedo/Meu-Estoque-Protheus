@@ -7,10 +7,6 @@ import 'package:meuestoque_protheus/features/epc_location/presentation/widgets/s
 import 'package:meuestoque_protheus/features/epc_location/presentation/widgets/streetlist_dropdown.dart';
 import 'package:input_with_keyboard_control/input_with_keyboard_control.dart';
 
-import 'package:meuestoque_protheus/objectbox.g.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
-
 class WarehouseForm extends StatefulWidget {
   WarehouseForm({Key? key, required this.info}) : super(key: key);
   final Warehouse info;
@@ -33,6 +29,20 @@ class _WarehouseFormState extends State<WarehouseForm> {
 
   final textController = TextEditingController();
   final focusNode = InputWithKeyboardControlFocusNode();
+
+  var myMenuItems = <String>[
+    'Deletar Todos',
+  ];
+
+  void onSelect(item) {
+    switch (item) {
+      case 'Deletar Todos':
+        setState(() {
+          widget.aEpcs.clear();
+        });
+        break;
+    }
+  }
 
   @override
   void initState() {
@@ -80,6 +90,18 @@ class _WarehouseFormState extends State<WarehouseForm> {
       appBar: AppBar(
         backgroundColor: secondaryColor,
         elevation: 0.0,
+        actions: [
+          PopupMenuButton<String>(
+              onSelected: onSelect,
+              itemBuilder: (BuildContext context) {
+                return myMenuItems.map((String choice) {
+                  return PopupMenuItem<String>(
+                    child: Text(choice),
+                    value: choice,
+                  );
+                }).toList();
+              })
+        ],
       ),
       body: !hasBeenInitilized
           ? const Center(
@@ -88,7 +110,7 @@ class _WarehouseFormState extends State<WarehouseForm> {
           : Column(
               children: [
                 Container(
-                  height: height / 6,
+                  height: height / 5,
                   width: width,
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   decoration: const BoxDecoration(
@@ -135,28 +157,21 @@ class _WarehouseFormState extends State<WarehouseForm> {
                   padding:
                       const EdgeInsets.only(left: 10.0, right: 15.0, top: 10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text("Código Lidos: ${widget.aEpcs.length}"),
-                      TextButton(
-                        onPressed: handleSubmmit,
-                        child: const Text("Salvar"),
-                      ),
                       IconButton(
                         icon: const Icon(
-                          Icons.delete_forever,
-                          color: Colors.red,
+                          Icons.save,
+                          color: Colors.green,
                         ),
-                        onPressed: () {
-                          setState(() {
-                            widget.aEpcs.clear();
-                          });
-                        },
+                        iconSize: 35,
+                        onPressed: handleSubmmit,
                       ),
                     ],
                   ),
                 ),
-                TextField(
+                /*  TextField(
                   maxLength: 24,
                   controller: _controller,
                   onSubmitted: (value) {
@@ -168,8 +183,8 @@ class _WarehouseFormState extends State<WarehouseForm> {
                   onChanged: (value) => print(value),
                   autofocus: true,
                   showCursor: true,
-                ),
-                /*    InputWithKeyboardControl(
+                ), */
+                InputWithKeyboardControl(
                   focusNode: focusNode,
                   onSubmitted: (value) {
                     print(value);
@@ -187,10 +202,10 @@ class _WarehouseFormState extends State<WarehouseForm> {
                   buttonColorEnabled: Colors.blue,
                   buttonColorDisabled: Colors.red,
                   underlineColor: Colors.white,
-                  showUnderline: true,
-                  showButton: true,
+                  showUnderline: false,
+                  showButton: false,
                   style: const TextStyle(color: Colors.white),
-                ), */
+                ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 1.0),
@@ -213,6 +228,7 @@ class _WarehouseFormState extends State<WarehouseForm> {
                                 return ListTile(
                                   title: Text(widget.aEpcs[index]),
                                   //leading: const Icon(Icons.qr_code_2),
+                                  minVerticalPadding: 0,
                                   visualDensity: VisualDensity.compact,
                                   trailing: IconButton(
                                     icon: const Icon(Icons.delete_forever),

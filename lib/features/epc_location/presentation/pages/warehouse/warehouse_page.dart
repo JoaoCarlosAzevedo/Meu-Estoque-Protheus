@@ -26,7 +26,7 @@ class WarehousePage extends StatelessWidget {
       body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(defaultPadding),
-          child: WarehousesGrid(),
+          child: SingleChildScrollView(child: WarehousesGrid()),
         ),
       ),
     );
