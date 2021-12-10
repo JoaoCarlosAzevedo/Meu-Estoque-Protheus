@@ -176,13 +176,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0"
+  dartz:
+    dependency: "direct main"
+    description:
+      name: dartz
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.10.1"
   dio:
     dependency: "direct main"
     description:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "4.0.4"
   equatable:
     dependency: "direct main"
     description:
@@ -305,6 +312,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  input_with_keyboard_control:
+    dependency: "direct main"
+    description:
+      name: input_with_keyboard_control
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.8"
   io:
     dependency: transitive
     description:

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/models/warehouses.dart';
 import 'package:meuestoque_protheus/features/epc_location/model/epc_locations_model.dart';
-import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse_controller.dart';
+import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse/warehouse_controller.dart';
 import 'package:meuestoque_protheus/features/epc_location/presentation/widgets/shelf_radio.dart';
 import 'package:meuestoque_protheus/features/epc_location/presentation/widgets/streetlist_dropdown.dart';
+import 'package:input_with_keyboard_control/input_with_keyboard_control.dart';
+
 import 'package:meuestoque_protheus/objectbox.g.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
@@ -28,6 +30,9 @@ class _WarehouseFormState extends State<WarehouseForm> {
   final shelfController = TextEditingController();
 
   final warehousePageController = WarehousePageController();
+
+  final textController = TextEditingController();
+  final focusNode = InputWithKeyboardControlFocusNode();
 
   @override
   void initState() {
@@ -56,21 +61,14 @@ class _WarehouseFormState extends State<WarehouseForm> {
   }
 
   void handleSubmmit() {
-    if (warehousePageController.id == -1) {
-      EpcLocation location = EpcLocation(
-          armazem: widget.info.warehouseName,
-          coluna: shelfController.text,
-          rua: streetController.text,
-          epcs: widget.aEpcs);
-      warehousePageController.addEpcLocation(location);
-    } else {
-      EpcLocation epcLocation =
-          warehousePageController.box.get(warehousePageController.id)!;
+    EpcLocation location = EpcLocation(
+        armazem: widget.info.warehouseName,
+        coluna: shelfController.text,
+        rua: streetController.text,
+        epcs: widget.aEpcs);
 
-      epcLocation.epcs = widget.aEpcs;
-
-      warehousePageController.box.put(epcLocation);
-    }
+    warehousePageController.epcLocationSave(
+        warehousePageController.id, location, widget.aEpcs);
   }
 
   @override
@@ -171,6 +169,28 @@ class _WarehouseFormState extends State<WarehouseForm> {
                   autofocus: true,
                   showCursor: true,
                 ),
+                /*    InputWithKeyboardControl(
+                  focusNode: focusNode,
+                  onSubmitted: (value) {
+                    print(value);
+                    var aux = value.splitByLength(24, value);
+                    setState(() {
+                      aux.forEach((element) => widget.aEpcs.add(element));
+                    });
+                    focusNode.requestFocus();
+                    textController.clear();
+                  },
+                  autofocus: true,
+                  controller: textController,
+                  width: double.infinity,
+                  startShowKeyboard: false,
+                  buttonColorEnabled: Colors.blue,
+                  buttonColorDisabled: Colors.red,
+                  underlineColor: Colors.white,
+                  showUnderline: true,
+                  showButton: true,
+                  style: const TextStyle(color: Colors.white),
+                ), */
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 1.0),
@@ -210,5 +230,25 @@ class _WarehouseFormState extends State<WarehouseForm> {
               ],
             ),
     );
+  }
+}
+
+extension on String {
+  List<String> splitByLength(int length, String string) {
+    var nMax = 0;
+    var char = "";
+    List<String> data = [];
+
+    for (int i = 0; i < string.length; i++) {
+      char += string[i];
+      nMax++;
+      if (nMax == length) {
+        data.add(char);
+        char = "";
+        nMax = 0;
+      }
+    }
+
+    return data;
   }
 }

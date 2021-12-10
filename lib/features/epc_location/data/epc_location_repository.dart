@@ -1,13 +1,22 @@
-import 'package:meuestoque_protheus/features/epc_location/data/epc_location_service.dart';
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:meuestoque_protheus/core/error/failure.dart';
 import 'package:meuestoque_protheus/features/epc_location/model/epc_locations_model.dart';
 
 class EpcLocationRepository {
-  final LocationNetworkService service;
+  final baseUrl = dotenv.env['API'];
 
-  EpcLocationRepository({required this.service});
-
-  Future<List<EpcLocation>> postEpcLocation(EpcLocation epcsLocation) async {
-    final epcs = await service.postEpcLocations(epcsLocation);
-    return epcs.map((e) => EpcLocation.fromJson(e)).toList();
+  Future<Either<Failure, EpcLocation>> postEpcLocations(
+      EpcLocation epcs) async {
+    try {
+      var response =
+          await Dio().post('${baseUrl!}/v2enderecamento/', data: epcs.toJson());
+      final epcResponse = EpcLocation.fromMap(response.data);
+      return Right(epcResponse);
+    } catch (e) {
+      return const Left(Failure("Server Error!"));
+    }
   }
 }
+ 

@@ -21,11 +21,19 @@ class WarehousePageController {
             EpcLocation_.coluna.equals(shelf))
         .watch(triggerImmediately: true)
         .map((query) {
-      //id = query.findFirst()!.id;
-
       id = query.findFirst()?.id ?? -1;
 
       return query.findFirst();
     });
+  }
+
+  void epcLocationSave(int id, EpcLocation epc, List<String> epcs) {
+    if (id == -1) {
+      addEpcLocation(epc);
+    } else {
+      EpcLocation epcLocation = box.get(id)!;
+      epcLocation.epcs = epcs;
+      box.put(epcLocation);
+    }
   }
 }
