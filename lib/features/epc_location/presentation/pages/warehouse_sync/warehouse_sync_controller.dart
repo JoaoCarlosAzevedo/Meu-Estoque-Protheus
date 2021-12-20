@@ -32,6 +32,5 @@ class WarehouseSyncController {
     EpcLocation epcLocation = box.get(id)!;
     epcLocation.epcs = epcs;
     box.put(epcLocation);
-    print(epcs);
   }
 }

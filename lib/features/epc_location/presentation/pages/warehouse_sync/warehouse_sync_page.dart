@@ -6,7 +6,6 @@ import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/themes/app_text_styles.dart';
 import 'package:meuestoque_protheus/features/epc_location/model/epc_locations_model.dart';
 import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse_sync/warehouse_sync_controller.dart';
-import 'package:meuestoque_protheus/features/epc_location/presentation/widgets/warehouse_grid_widget.dart';
 
 class WarehoueSyncPage extends StatefulWidget {
   const WarehoueSyncPage({Key? key}) : super(key: key);

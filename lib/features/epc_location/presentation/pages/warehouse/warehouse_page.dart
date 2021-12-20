@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
-import 'package:meuestoque_protheus/features/epc_location/presentation/widgets/warehouse_grid_widget.dart';
+import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse/widgets/warehouse_grid_widget.dart';
 
 class WarehousePage extends StatelessWidget {
   const WarehousePage({Key? key}) : super(key: key);

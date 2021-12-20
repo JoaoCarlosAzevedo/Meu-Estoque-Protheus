@@ -12,13 +12,13 @@ const defaultPadding = 16.0;
 
 List menuItens = [
   MenuItem(
-    title: "Saldos",
+    title: "Invetário RFID",
     numOfFiles: 1328,
     icon: FontAwesomeIcons.clipboardList,
     totalStorage: "1GB",
     color: const Color(0xFFA4CDFF),
     percentage: 10,
-    route: 'error',
+    route: 'epcinventory',
   ),
   MenuItem(
     title: "Consultar Endereços",

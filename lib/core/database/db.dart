@@ -6,7 +6,7 @@ class Db {
   static Store? _store;
 
   static void init(Directory dir) {
-    _store = Store(getObjectBoxModel(), directory: dir.path + '/mybudget');
+    _store = Store(getObjectBoxModel(), directory: dir.path + '/myDB');
   }
 
   static void dispose() {

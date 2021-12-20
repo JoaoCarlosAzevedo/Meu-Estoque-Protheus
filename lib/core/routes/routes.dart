@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/inventory_coletor_page.dart';
 import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse/warehouse_page.dart';
 import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse_sync/warehouse_sync_page.dart';
 import 'package:meuestoque_protheus/pages/home/home_page.dart';
@@ -30,6 +31,10 @@ class AppRouter {
       case "/epclocationsync":
         return MaterialPageRoute(
             builder: (context) => const WarehoueSyncPage());
+
+      case "/epcinventory":
+        return MaterialPageRoute(
+            builder: (context) => const InventoryColetorPage());
 
       default:
         return MaterialPageRoute(
