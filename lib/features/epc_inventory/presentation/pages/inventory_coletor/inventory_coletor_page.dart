@@ -1,13 +1,11 @@
-import 'dart:convert';
-
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:input_with_keyboard_control/input_with_keyboard_control.dart';
 import 'package:intl/intl.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/themes/app_text_styles.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/model/epc_inventory_model.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/inventory_coletor_controller.dart';
+import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/widgets/input_no_keyboard.dart';
 
 class InventoryColetorPage extends StatefulWidget {
   const InventoryColetorPage({Key? key}) : super(key: key);
@@ -19,16 +17,42 @@ class InventoryColetorPage extends StatefulWidget {
 class _InventoryColetorPageState extends State<InventoryColetorPage> {
   final DateFormat formatter = DateFormat('dd/MM/yyyy');
   List<EpcInventory?> aEpcs = [];
+  List<String> etiquetas = [];
   String _selectedValue = "";
   final InventoryColetorController controller = InventoryColetorController();
   final textController = TextEditingController();
-  final focusNode = InputWithKeyboardControlFocusNode();
+  final focusNode = InputWithKeyboardControlv2FocusNode();
 
   @override
   void initState() {
     _selectedValue = formatter.format(DateTime.now().toUtc());
     controller.searchEcps();
+
+    /*   textController.addListener(() {
+      _addReadTag();
+      textController.clear();
+    }); */
+
     super.initState();
+  }
+
+/*   void _addReadTag() {
+    if (textController.text.contains("eol")) {
+      var splited = textController.text.split("eol");
+      for (var element in splited) {
+        if (element.trim().isNotEmpty) {
+          etiquetas.add(element.trim());
+          controller.addEpc(EpcInventory(epc: element.trim()));
+        }
+      }
+    }
+    textController.clear();
+  } */
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -46,13 +70,13 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
           IconButton(
             icon: const Icon(Icons.sync_rounded),
             onPressed: () {
-              Map<String, dynamic> json = {
+              /*              Map<String, dynamic> json = {
                 'armazem': '',
                 'data': _selectedValue,
                 'epcs': aEpcs.map((e) => e!.epc).toList()
               };
               //print(jsonEncode(json));
-              controller.post(jsonEncode(json));
+              controller.post(jsonEncode(json)); */
             },
           ),
         ],
@@ -138,20 +162,25 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
                           ), */
                         ],
                       ),
-                      InputWithKeyboardControl(
+                      InputWithKeyboardControlv2(
                         focusNode: focusNode,
                         onSubmitted: (value) {
-                          /*      var aux = value.splitByLength(24, value);
-                          setState(() {
-                            aux.forEach((element) {
-                              if (!widget.aEpcs.contains(element)) {
-                                widget.aEpcs.add(element);
-                              }
-                            });
-                          }); */
-
-                          controller.addEpc(EpcInventory(epc: value));
                           focusNode.requestFocus();
+                        },
+                        onChanged: (value) {
+                          if (textController.text.contains("eol")) {
+                            var splited = textController.text.split("eol");
+                            for (var element in splited) {
+                              if (element.trim().isNotEmpty) {
+                                var exist = aEpcs
+                                    .any((item) => item!.epc == element.trim());
+                                if (!exist) {
+                                  controller.addEpc(
+                                      EpcInventory(epc: element.trim()));
+                                }
+                              }
+                            }
+                          }
                           textController.clear();
                         },
                         autofocus: true,
