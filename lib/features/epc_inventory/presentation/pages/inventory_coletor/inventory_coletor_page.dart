@@ -16,8 +16,8 @@ class InventoryColetorPage extends StatefulWidget {
 
 class _InventoryColetorPageState extends State<InventoryColetorPage> {
   final DateFormat formatter = DateFormat('dd/MM/yyyy');
-  List<EpcInventory?> aEpcs = [];
-  List<String> etiquetas = [];
+  List<String> aEpcs = [];
+  final tags = <String>{};
   String _selectedValue = "";
   final InventoryColetorController controller = InventoryColetorController();
   final textController = TextEditingController();
@@ -27,31 +27,11 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
   void initState() {
     _selectedValue = formatter.format(DateTime.now().toUtc());
     controller.searchEcps();
-
-    /*   textController.addListener(() {
-      _addReadTag();
-      textController.clear();
-    }); */
-
     super.initState();
   }
 
-/*   void _addReadTag() {
-    if (textController.text.contains("eol")) {
-      var splited = textController.text.split("eol");
-      for (var element in splited) {
-        if (element.trim().isNotEmpty) {
-          etiquetas.add(element.trim());
-          controller.addEpc(EpcInventory(epc: element.trim()));
-        }
-      }
-    }
-    textController.clear();
-  } */
-
   @override
   void dispose() {
-    focusNode.dispose();
     super.dispose();
   }
 
@@ -134,11 +114,11 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
           StreamBuilder<List<EpcInventory?>>(
               stream: controller.stream,
               builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  aEpcs = snapshot.data!;
-                } else {
-                  aEpcs = [];
-                }
+                //if (snapshot.hasData) {
+                //  aEpcs = snapshot.data!;
+                //} else {
+                //  aEpcs = [];
+                //}
                 return Expanded(
                   child: Column(
                     children: [
@@ -150,16 +130,6 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
                             aEpcs.length.toString(),
                             style: TextStyles.titleHome,
                           ),
-                          /*     IconButton(
-                            icon: const Icon(
-                              Icons.save,
-                              color: Colors.green,
-                            ),
-                            iconSize: 30,
-                            onPressed: () {
-                              controller.addEpc(EpcInventory(epc: 'x'));
-                            },
-                          ), */
                         ],
                       ),
                       InputWithKeyboardControlv2(
@@ -168,20 +138,39 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
                           focusNode.requestFocus();
                         },
                         onChanged: (value) {
-                          if (textController.text.contains("eol")) {
-                            var splited = textController.text.split("eol");
-                            for (var element in splited) {
-                              if (element.trim().isNotEmpty) {
-                                var exist = aEpcs
-                                    .any((item) => item!.epc == element.trim());
-                                if (!exist) {
-                                  controller.addEpc(
-                                      EpcInventory(epc: element.trim()));
-                                }
-                              }
+                          print(value);
+
+                          var splited = value.split("eol");
+
+                          textController.clear();
+
+                          for (var element in splited) {
+                            if (element.trim().isNotEmpty) {
+                              tags.add(element.trim());
+                              //    print(element.trim());
                             }
                           }
-                          textController.clear();
+                          setState(() {
+                            aEpcs = tags.toList();
+                          });
+
+                          focusNode.requestFocus();
+
+                          /* 
+                          var splited = textController.text.split("eol");
+                          for (var element in splited) {
+                            if (element.trim().isNotEmpty) {
+                              tags.add(element.trim());
+                            }
+                          } */
+                          //tags.add(value.trim());
+
+                          /*           setState(() {
+                            aEpcs = tags.toList();
+                          });
+ */
+                          //textController.clear();
+                          focusNode.requestFocus();
                         },
                         autofocus: true,
                         controller: textController,
@@ -199,7 +188,7 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
                             itemCount: aEpcs.length,
                             itemBuilder: (BuildContext context, int index) {
                               return ListTile(
-                                title: Text(aEpcs[index]!.epc),
+                                title: Text(aEpcs[index]),
                                 visualDensity: VisualDensity.compact,
                                 trailing: IconButton(
                                   icon: const Icon(
@@ -207,7 +196,10 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
                                     color: Colors.red,
                                   ),
                                   onPressed: () {
-                                    controller.removeEpc(aEpcs[index]!.id);
+                                    setState(() {
+                                      tags.clear();
+                                      aEpcs.clear();
+                                    });
                                   },
                                 ),
                               );

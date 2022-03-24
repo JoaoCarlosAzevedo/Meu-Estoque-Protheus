@@ -36,7 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^2.1.0
   font_awesome_flutter: ^9.1.0
-  
+  uhf_c72_plugin: ^0.1.0
+
   #Env Variables
   flutter_dotenv: ^5.0.2
 
