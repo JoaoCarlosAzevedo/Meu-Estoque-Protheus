@@ -7,6 +7,8 @@ import 'package:meuestoque_protheus/features/epc_inventory/model/epc_inventory_m
 import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/inventory_coletor_controller.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/widgets/input_no_keyboard.dart';
 
+import 'widgets/tag_reader.dart';
+
 class InventoryColetorPage extends StatefulWidget {
   const InventoryColetorPage({Key? key}) : super(key: key);
 
@@ -41,27 +43,28 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Data da contagem"),
-        centerTitle: true,
-        backgroundColor: secondaryColor,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.sync_rounded),
-            onPressed: () {
-              /*              Map<String, dynamic> json = {
+        appBar: AppBar(
+          title: const Text("Data da contagem"),
+          centerTitle: true,
+          backgroundColor: secondaryColor,
+          elevation: 0,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.sync_rounded),
+              onPressed: () {
+                /*              Map<String, dynamic> json = {
                 'armazem': '',
                 'data': _selectedValue,
                 'epcs': aEpcs.map((e) => e!.epc).toList()
               };
               //print(jsonEncode(json));
               controller.post(jsonEncode(json)); */
-            },
-          ),
-        ],
-      ),
-      body: Column(
+              },
+            ),
+          ],
+        ),
+        body:
+            const TagReader() /* Column(
         children: [
           Container(
             height: height / 4,
@@ -130,6 +133,14 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
                             aEpcs.length.toString(),
                             style: TextStyles.titleHome,
                           ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.remove),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.add),
+                          ),
                         ],
                       ),
                       InputWithKeyboardControlv2(
@@ -138,8 +149,6 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
                           focusNode.requestFocus();
                         },
                         onChanged: (value) {
-                          print(value);
-
                           var splited = value.split("eol");
 
                           textController.clear();
@@ -210,7 +219,7 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
                 );
               }),
         ],
-      ),
-    );
+      ), */
+        );
   }
 }
