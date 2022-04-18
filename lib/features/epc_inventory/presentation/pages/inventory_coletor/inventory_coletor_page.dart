@@ -1,11 +1,9 @@
-import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
-import 'package:meuestoque_protheus/core/themes/app_text_styles.dart';
-import 'package:meuestoque_protheus/features/epc_inventory/model/epc_inventory_model.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/inventory_coletor_controller.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/widgets/input_no_keyboard.dart';
+import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/widgets/inventory_form.dart';
 
 import 'widgets/tag_reader.dart';
 
@@ -44,21 +42,33 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Data da contagem"),
+          title: const Text("Coleta de Etiquetas"),
           centerTitle: true,
           backgroundColor: secondaryColor,
           elevation: 0,
           actions: [
-            IconButton(
-              icon: const Icon(Icons.sync_rounded),
-              onPressed: () {
-                /*              Map<String, dynamic> json = {
-                'armazem': '',
-                'data': _selectedValue,
-                'epcs': aEpcs.map((e) => e!.epc).toList()
-              };
-              //print(jsonEncode(json));
-              controller.post(jsonEncode(json)); */
+            PopupMenuButton(
+              color: secondaryColor,
+              itemBuilder: (context) {
+                return const [
+                  PopupMenuItem(
+                    value: 'edit',
+                    child: Text('Enviar ao ERP'),
+                  ),
+                  PopupMenuItem(
+                    value: 'delete',
+                    child: Text('Limpar Leitura'),
+                  )
+                ];
+              },
+              onSelected: (String value) {
+                //print('You Click on po up menu item $value');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const InventoryForm(
+                              tags: [],
+                            )));
               },
             ),
           ],

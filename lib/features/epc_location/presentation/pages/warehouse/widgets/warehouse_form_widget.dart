@@ -18,8 +18,6 @@ class WarehouseForm extends StatefulWidget {
 }
 
 class _WarehouseFormState extends State<WarehouseForm> {
-  final TextEditingController _controller = TextEditingController();
-
   bool hasBeenInitilized = false;
 
   final streetController = TextEditingController();
@@ -165,7 +163,7 @@ class _WarehouseFormState extends State<WarehouseForm> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text("Código Lidos: "),
+                            const Text("Código Lidos: "),
                             Text(
                               widget.aEpcs.length.toString(),
                               style: TextStyles.titleHome,
@@ -186,11 +184,11 @@ class _WarehouseFormState extends State<WarehouseForm> {
                         onSubmitted: (value) {
                           var aux = value.splitByLength(24, value);
                           setState(() {
-                            aux.forEach((element) {
+                            for (var element in aux) {
                               if (!widget.aEpcs.contains(element)) {
                                 widget.aEpcs.add(element);
                               }
-                            });
+                            }
                           });
 
                           /*  if (!widget.aEpcs.contains(value)) {

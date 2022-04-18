@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/themes/app_text_styles.dart';

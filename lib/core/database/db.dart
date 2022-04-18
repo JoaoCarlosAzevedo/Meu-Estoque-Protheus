@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:meuestoque_protheus/objectbox.g.dart';
-import 'package:objectbox/objectbox.dart';
 
 class Db {
   static Store? _store;
