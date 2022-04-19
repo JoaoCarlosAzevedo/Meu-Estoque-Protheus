@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
-class EpcLocation {
+class EpcLocation extends Equatable {
   int id;
   String armazem;
   String rua;
@@ -17,12 +18,16 @@ class EpcLocation {
       required this.coluna,
       required this.epcs});
 
+  @override
+  List<Object> get props => [armazem, rua, coluna, epcs];
+
   Map<String, dynamic> toMap() {
     return {
       'armazem': armazem,
       'rua': rua,
       'coluna': coluna,
       'epcs': epcs,
+      'id': id
     };
   }
 
@@ -31,6 +36,7 @@ class EpcLocation {
       armazem: map['armazem'],
       rua: map['rua'],
       coluna: map['coluna'],
+      id: map['id'],
       epcs: List<String>.from(map['epcs']),
     );
   }

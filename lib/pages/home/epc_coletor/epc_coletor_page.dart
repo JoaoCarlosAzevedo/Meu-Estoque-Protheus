@@ -33,10 +33,9 @@ class _EpcColetorState extends State<EpcColetor> {
                         hintText: "EPC",
                         fillColor: secondaryColor,
                         filled: true,
-                        border: OutlineInputBorder(
+                        border: const OutlineInputBorder(
                           borderSide: BorderSide.none,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                       ),
                     ),
@@ -44,14 +43,13 @@ class _EpcColetorState extends State<EpcColetor> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      padding: EdgeInsets.all(defaultPadding * 1.2),
-                      margin: EdgeInsets.only(left: defaultPadding),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.all(defaultPadding * 1.2),
+                      margin: const EdgeInsets.only(left: defaultPadding),
+                      decoration: const BoxDecoration(
                         color: Colors.red,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
-                      child: Icon(Icons.delete_forever),
+                      child: const Icon(Icons.delete_forever),
                     ),
                   )
                 ],

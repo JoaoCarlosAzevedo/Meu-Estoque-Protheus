@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/models/menu_model.dart';
-import 'package:meuestoque_protheus/pages/warehouse/warehouse_page.dart';
-//import 'package:meuestoque_protheus/pages/home/epc_coletor/epc_coletor_page.dart';
 
 class MenuCard extends StatelessWidget {
   const MenuCard({Key? key, required this.info}) : super(key: key);
@@ -14,8 +12,10 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const WarehousePage()));
+        Navigator.pushNamed(context, '/' + info.route);
+
+        /*        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const WarehousePage())); */
       },
       child: Container(
         padding: const EdgeInsets.all(defaultPadding),

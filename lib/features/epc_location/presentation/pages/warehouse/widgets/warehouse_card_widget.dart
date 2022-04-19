@@ -59,13 +59,6 @@ class WareHouseCard extends StatelessWidget {
                       .caption!
                       .copyWith(color: Colors.white70),
                 ),
-                Text(
-                  "${info.shelf.length}",
-                  style: Theme.of(context)
-                      .textTheme
-                      .caption!
-                      .copyWith(color: Colors.white),
-                ),
               ],
             )
           ],

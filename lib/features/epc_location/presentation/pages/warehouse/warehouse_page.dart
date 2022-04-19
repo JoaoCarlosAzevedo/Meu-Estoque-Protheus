@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
-
-import 'warehouse_widgets/warehouse_grid_widget.dart';
+import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse/widgets/warehouse_grid_widget.dart';
 
 class WarehousePage extends StatelessWidget {
   const WarehousePage({Key? key}) : super(key: key);
@@ -27,7 +26,7 @@ class WarehousePage extends StatelessWidget {
       body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(defaultPadding),
-          child: WarehousesGrid(),
+          child: SingleChildScrollView(child: WarehousesGrid()),
         ),
       ),
     );

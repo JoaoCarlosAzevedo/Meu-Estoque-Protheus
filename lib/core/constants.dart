@@ -12,12 +12,13 @@ const defaultPadding = 16.0;
 
 List menuItens = [
   MenuItem(
-    title: "Saldos",
+    title: "Invetário RFID",
     numOfFiles: 1328,
     icon: FontAwesomeIcons.clipboardList,
     totalStorage: "1GB",
     color: const Color(0xFFA4CDFF),
     percentage: 10,
+    route: 'epcinventory',
   ),
   MenuItem(
     title: "Consultar Endereços",
@@ -26,6 +27,7 @@ List menuItens = [
     totalStorage: "7.3GB",
     color: const Color(0xFF007EE5),
     percentage: 78,
+    route: 'error',
   ),
   MenuItem(
     title: "Endereçar RFID",
@@ -34,15 +36,16 @@ List menuItens = [
     totalStorage: "1.9GB",
     color: primaryColor,
     percentage: 35,
+    route: 'epclocation',
   ),
   MenuItem(
-    title: "Invetário RFID",
-    numOfFiles: 1328,
-    icon: FontAwesomeIcons.clipboardCheck,
-    totalStorage: "2.9GB",
-    color: const Color(0xFFFFA113),
-    percentage: 35,
-  ),
+      title: "Sincronizar RFID",
+      numOfFiles: 1328,
+      icon: FontAwesomeIcons.clipboardCheck,
+      totalStorage: "2.9GB",
+      color: const Color(0xFFFFA113),
+      percentage: 35,
+      route: 'epclocationsync'),
 ];
 
 List warehouses = [
