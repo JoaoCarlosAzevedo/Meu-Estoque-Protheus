@@ -5,11 +5,12 @@ import 'package:uhf_c72_plugin/tag_epc.dart';
 import 'package:uhf_c72_plugin/uhf_c72_plugin.dart';
 
 class RFIDReader {
-  bool? isConnected;
+  bool? isConnected = false;
   bool? started;
   bool? isStopped;
   List<TagEpc> tags = [];
-  StreamController<List<TagEpc>> tagsStream = StreamController<List<TagEpc>>();
+  StreamController<List<String>> tagsStream = StreamController<List<String>>();
+  Set<String> setEpcs = {};
 
   void connect() async {
     UhfC72Plugin.connectedStatusStream
@@ -31,11 +32,22 @@ class RFIDReader {
 
   void updateIsConnected(connection) async {
     isConnected = await UhfC72Plugin.isConnected;
+    print(isConnected);
   }
 
   void updateTags(dynamic result) {
     tags = TagEpc.parseTags(result);
-    tagsStream.add(tags);
+
+    setEpcs.addAll(tags.map((e) => e.epc.substring(4)).toList());
+
+    tagsStream.add(setEpcs.toList());
+
+    clearData();
+  }
+
+  void clearAll() {
+    setEpcs.clear();
+    clearData();
   }
 
   void startReading() async {
@@ -55,10 +67,12 @@ class RFIDReader {
   void clearData() async {
     await UhfC72Plugin.clearData;
     tags.clear();
+    tagsStream.add(setEpcs.toList());
   }
 
-  void deleteTag(int index) {
-    tags.removeAt(index);
-    tagsStream.add(tags);
+  void deleteTag(String epc) {
+    //tags.removeAt(index);
+    setEpcs.remove(epc);
+    tagsStream.add(setEpcs.toList());
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
-import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/inventory_coletor_controller.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/widgets/input_no_keyboard.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/widgets/inventory_form.dart';
 
@@ -19,14 +18,14 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
   List<String> aEpcs = [];
   final tags = <String>{};
   String _selectedValue = "";
-  final InventoryColetorController controller = InventoryColetorController();
+  //final InventoryColetorController controller = InventoryColetorController();
   final textController = TextEditingController();
   final focusNode = InputWithKeyboardControlv2FocusNode();
 
   @override
   void initState() {
     _selectedValue = formatter.format(DateTime.now().toUtc());
-    controller.searchEcps();
+    //controller.searchEcps();
     super.initState();
   }
 
@@ -52,10 +51,6 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
               itemBuilder: (context) {
                 return const [
                   PopupMenuItem(
-                    value: 'edit',
-                    child: Text('Enviar ao ERP'),
-                  ),
-                  PopupMenuItem(
                     value: 'delete',
                     child: Text('Limpar Leitura'),
                   )
@@ -73,8 +68,11 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
             ),
           ],
         ),
-        body:
-            const TagReader() /* Column(
+        body: TagReader(
+          onRead: (e) {
+            print('onRead:${e.length}');
+          },
+        ) /* Column(
         children: [
           Container(
             height: height / 4,

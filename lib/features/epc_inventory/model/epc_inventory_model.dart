@@ -5,23 +5,31 @@ import 'package:objectbox/objectbox.dart';
 @Entity()
 class EpcInventory {
   int id;
-  String epc;
+  String user;
+  String obs;
+  List<String> tags;
   EpcInventory({
-    this.id = 0,
-    required this.epc,
+    required this.id,
+    required this.user,
+    required this.obs,
+    required this.tags,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'epc': epc,
+      'user': user,
+      'obs': obs,
+      'tags': tags,
     };
   }
 
   factory EpcInventory.fromMap(Map<String, dynamic> map) {
     return EpcInventory(
       id: map['id']?.toInt() ?? 0,
-      epc: map['epc'] ?? '',
+      user: map['user'] ?? '',
+      obs: map['obs'] ?? '',
+      tags: List<String>.from(map['tags']),
     );
   }
 

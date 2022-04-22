@@ -1,4 +1,4 @@
-import 'package:meuestoque_protheus/core/database/db.dart';
+/* import 'package:meuestoque_protheus/core/database/db.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/data/epc_inventory_repository.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/model/epc_inventory_model.dart';
 import 'package:objectbox/objectbox.dart';
@@ -43,3 +43,4 @@ class InventoryColetorController {
     }
   }
 }
+ */

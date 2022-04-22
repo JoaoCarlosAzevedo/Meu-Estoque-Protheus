@@ -39,7 +39,7 @@
     },
     {
       "id": "2:612357026391531939",
-      "lastPropertyId": "2:7313092101754780393",
+      "lastPropertyId": "5:8973996487730062378",
       "name": "EpcInventory",
       "properties": [
         {
@@ -49,9 +49,19 @@
           "flags": 1
         },
         {
-          "id": "2:7313092101754780393",
-          "name": "epc",
+          "id": "3:7201632864466202723",
+          "name": "user",
           "type": 9
+        },
+        {
+          "id": "4:5580426707064390797",
+          "name": "obs",
+          "type": 9
+        },
+        {
+          "id": "5:8973996487730062378",
+          "name": "tags",
+          "type": 30
         }
       ],
       "relations": []
@@ -65,7 +75,9 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    7313092101754780393
+  ],
   "retiredRelationUids": [],
   "version": 1
 }
