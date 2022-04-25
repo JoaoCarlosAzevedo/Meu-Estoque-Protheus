@@ -68,11 +68,45 @@ class _InventoryColetorPageState extends State<InventoryColetorPage> {
             ),
           ],
         ),
-        body: TagReader(
+        body: Center(
+          child: IconButton(
+            icon: const Icon(Icons.ac_unit_outlined),
+            onPressed: () async {
+              List<String>? aEpc = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TagReader(
+                    onRead: (e) {
+                      print(e);
+                    },
+                  ),
+                ),
+              );
+
+              aEpc ??= [];
+
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Teste'),
+                  content: Text('Etiq. Lidas ${aEpc!.length}'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: const Text('Cancel'),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        )
+
+        /* TagReader(
           onRead: (e) {
             print('onRead:${e.length}');
           },
-        ) /* Column(
+        ) */ /* Column(
         children: [
           Container(
             height: height / 4,

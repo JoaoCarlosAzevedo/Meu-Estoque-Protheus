@@ -12,11 +12,13 @@ class RFIDReader {
   StreamController<List<String>> tagsStream = StreamController<List<String>>();
   Set<String> setEpcs = {};
 
-  void connect() async {
+  Future<bool> connect() async {
     UhfC72Plugin.connectedStatusStream
         .receiveBroadcastStream()
         .listen(updateIsConnected);
     UhfC72Plugin.tagsStatusStream.receiveBroadcastStream().listen(updateTags);
+
+    await Future.delayed(const Duration(milliseconds: 1000), () {});
 
     bool? _isConnected = await UhfC72Plugin.connect;
 
@@ -24,6 +26,8 @@ class RFIDReader {
       await UhfC72Plugin.setWorkArea('2');
       await UhfC72Plugin.setPowerLevel('30');
     }
+
+    return _isConnected;
   }
 
   Stream<dynamic> stream() {
@@ -32,7 +36,7 @@ class RFIDReader {
 
   void updateIsConnected(connection) async {
     isConnected = await UhfC72Plugin.isConnected;
-    print(isConnected);
+    print('status da conexao: $isConnected');
   }
 
   void updateTags(dynamic result) {
@@ -52,6 +56,7 @@ class RFIDReader {
 
   void startReading() async {
     started = await UhfC72Plugin.startContinuous;
+    print('status reading: $started');
   }
 
   void stopReading() async {
@@ -59,8 +64,8 @@ class RFIDReader {
   }
 
   void close() async {
-    await UhfC72Plugin.clearData;
     await UhfC72Plugin.stop;
+    await UhfC72Plugin.clearData;
     await UhfC72Plugin.close;
   }
 
