@@ -1,4 +1,4 @@
-/* import 'package:meuestoque_protheus/core/database/db.dart';
+import 'package:meuestoque_protheus/core/database/db.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/data/epc_inventory_repository.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/model/epc_inventory_model.dart';
 import 'package:objectbox/objectbox.dart';
@@ -26,21 +26,20 @@ class InventoryColetorController {
     });
   }
 
-  void post(String json) async {
-    var ret = await remoteRepository.postEpcInventory(json);
+  void post(EpcInventory epc) async {
+    var ret = await remoteRepository.postEpcInventory(epc.toJson());
     if (ret.isRight()) {
-      ret.fold((l) => null, (r) => clearEpcs(r));
+      ret.fold((l) => null, (r) => print(r));
     } else {
       ret.fold((l) => print(l.error), (r) => null);
     }
   }
 
-  void clearEpcs(data) {
+/*   void clearEpcs(data) {
     final List<String> epcError = data['erros'].cast<String>();
     box.removeAll();
     for (var element in epcError) {
       addEpc(EpcInventory(epc: element));
     }
-  }
+  } */
 }
- */

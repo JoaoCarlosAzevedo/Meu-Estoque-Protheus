@@ -1,25 +1,32 @@
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
-class EpcInventory {
+class EpcInventory extends Equatable {
   int id;
   String user;
   String obs;
+  String data;
   List<String> tags;
   EpcInventory({
-    required this.id,
+    this.id = 0,
     required this.user,
     required this.obs,
+    required this.data,
     required this.tags,
   });
+
+  @override
+  List<Object> get props => [user, obs, data, tags];
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'user': user,
       'obs': obs,
+      'data': data,
       'tags': tags,
     };
   }
@@ -29,6 +36,7 @@ class EpcInventory {
       id: map['id']?.toInt() ?? 0,
       user: map['user'] ?? '',
       obs: map['obs'] ?? '',
+      data: map['data'] ?? '',
       tags: List<String>.from(map['tags']),
     );
   }
