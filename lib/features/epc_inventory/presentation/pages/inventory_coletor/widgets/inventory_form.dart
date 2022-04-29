@@ -81,7 +81,7 @@ class _InventoryFormState extends State<InventoryForm> {
                 )
               ];
             },
-            onSelected: (String value) {
+            onSelected: (String value) async {
               if (value == 'excluir') {
                 deleteInventory();
               }
@@ -93,7 +93,8 @@ class _InventoryFormState extends State<InventoryForm> {
               }
 
               if (value == 'sync') {
-                widget.controller.post(widget.epcInventory!);
+                String msg = await widget.controller.post(widget.epcInventory!);
+                showMessage(msg);
               }
             },
           ),
@@ -261,6 +262,22 @@ class _InventoryFormState extends State<InventoryForm> {
     Box<EpcInventory> box = widget.controller.box;
     box.remove(widget.epcInventory!.id);
     Navigator.of(context).pop();
+  }
+
+  void showMessage(String msg) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Confirmação!'),
+        content: Text(msg),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'OK'),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   void getTags() async {

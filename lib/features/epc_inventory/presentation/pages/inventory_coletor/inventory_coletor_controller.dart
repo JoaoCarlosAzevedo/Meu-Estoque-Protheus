@@ -26,13 +26,17 @@ class InventoryColetorController {
     });
   }
 
-  void post(EpcInventory epc) async {
+  Future<String> post(EpcInventory epc) async {
+    String response = "";
+
     var ret = await remoteRepository.postEpcInventory(epc.toJson());
     if (ret.isRight()) {
-      ret.fold((l) => null, (r) => print(r));
+      ret.fold((l) => null, (r) => response = r);
     } else {
-      ret.fold((l) => print(l.error), (r) => null);
+      ret.fold((l) => response = l.error, (r) => null);
     }
+
+    return response;
   }
 
 /*   void clearEpcs(data) {

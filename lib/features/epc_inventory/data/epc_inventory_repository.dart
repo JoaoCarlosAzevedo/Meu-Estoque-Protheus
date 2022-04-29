@@ -5,16 +5,21 @@ import 'package:meuestoque_protheus/core/error/failure.dart';
 
 class EpcInventoryRepository {
   //final baseUrl = dotenv.env['API'];
-  final baseUrl = 'http://192.168.0.47:1880';
+  final baseUrl = 'http://192.168.0.144:8400/rest';
 
-  Future<Either<Failure, dynamic>> postEpcInventory(String json) async {
+  Future<Either<Failure, String>> postEpcInventory(String json) async {
     try {
       var response = await Dio().post('$baseUrl/inventario/', data: json);
       //var response = await Dio().post('${baseUrl!}/inventario/', data: json);
+
       if (response.statusCode == 201) {
-        print("ok");
+        return Right(response.data["message"]);
       }
-      return Right(response.data);
+
+      if (response.statusCode == 400) {
+        return Right(response.data["errorMessage"]);
+      }
+      return const Right("Algo aconteceu!");
     } catch (e) {
       return const Left(Failure("Server Error!"));
     }
