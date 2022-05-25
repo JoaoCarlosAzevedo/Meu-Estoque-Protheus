@@ -166,7 +166,7 @@ class _WarehouseFormState extends State<WarehouseForm> {
                             const Text("Código Lidos: "),
                             Text(
                               widget.aEpcs.length.toString(),
-                              style: TextStyles.titleHome,
+                              style: TextStyles.titleHomev2,
                             ),
                             IconButton(
                               icon: const Icon(
@@ -182,11 +182,14 @@ class _WarehouseFormState extends State<WarehouseForm> {
                       InputWithKeyboardControl(
                         focusNode: focusNode,
                         onSubmitted: (value) {
-                          var aux = value.splitByLength(24, value);
+                          //var aux = value.splitByLength(24, value);
+                          var aux = value.split('EPC');
                           setState(() {
                             for (var element in aux) {
-                              if (!widget.aEpcs.contains(element)) {
-                                widget.aEpcs.add(element);
+                              if (element.isNotEmpty) {
+                                if (!widget.aEpcs.contains(element)) {
+                                  widget.aEpcs.add(element);
+                                }
                               }
                             }
                           });

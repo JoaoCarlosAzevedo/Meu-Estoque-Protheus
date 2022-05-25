@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:meuestoque_protheus/core/constants.dart';
 
 import 'app_colors.dart';
 
@@ -7,7 +8,17 @@ class TextStyles {
   static final titleHome = GoogleFonts.lexendDeca(
     fontSize: 32,
     fontWeight: FontWeight.w600,
+    color: bgColor,
+  );
+  static final titleHomev2 = GoogleFonts.lexendDeca(
+    fontSize: 32,
+    fontWeight: FontWeight.w600,
     color: AppColors.heading,
+  );
+  static final tagCounter = GoogleFonts.lexendDeca(
+    fontSize: 60,
+    fontWeight: FontWeight.w300,
+    color: bgColor,
   );
   static final titleRegular = GoogleFonts.lexendDeca(
     fontSize: 20,

@@ -4,10 +4,10 @@ import 'package:intl/intl.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/themes/app_colors.dart';
 import 'package:meuestoque_protheus/core/themes/app_text_styles.dart';
+import 'package:meuestoque_protheus/core/widgets/reader/tag_reader_widget.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/model/epc_inventory_model.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/inventory_coletor_controller.dart';
-import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/widgets/input_no_keyboard.dart';
-import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/widgets/tag_reader.dart';
+import 'package:meuestoque_protheus/core/widgets/reader/input_no_keyboard.dart';
 import 'package:meuestoque_protheus/objectbox.g.dart';
 import 'package:objectbox/objectbox.dart';
 
@@ -284,11 +284,7 @@ class _InventoryFormState extends State<InventoryForm> {
     List<String>? aEpc = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TagReader(
-          onRead: (e) {
-            print(e);
-          },
-        ),
+        builder: (context) => const TagReader(),
       ),
     );
 

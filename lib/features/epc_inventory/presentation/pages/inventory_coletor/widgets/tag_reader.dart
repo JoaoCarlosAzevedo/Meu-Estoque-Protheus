@@ -5,18 +5,18 @@ import 'package:meuestoque_protheus/core/themes/app_colors.dart';
 
 import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/widgets/RFID_controller.dart';
 
-class TagReader extends StatefulWidget {
-  const TagReader({
+class TagReaderv2 extends StatefulWidget {
+  const TagReaderv2({
     Key? key,
     required this.onRead,
   }) : super(key: key);
   final ValueChanged<List<String>> onRead;
 
   @override
-  State<TagReader> createState() => _TagReaderState();
+  State<TagReaderv2> createState() => _TagReaderState();
 }
 
-class _TagReaderState extends State<TagReader> {
+class _TagReaderState extends State<TagReaderv2> {
   RFIDReader rfidController = RFIDReader();
 
   @override
@@ -84,7 +84,7 @@ class RFIDReaderPage extends StatefulWidget {
   }) : super(key: key);
 
   final RFIDReader rfidController;
-  final TagReader widget;
+  final TagReaderv2 widget;
 
   @override
   State<RFIDReaderPage> createState() => _RFIDReaderPageState();
