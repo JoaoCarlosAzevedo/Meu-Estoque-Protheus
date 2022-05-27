@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.meuestoque_protheus">
+   <uses-permission android:name="android.permission.INTERNET" />   
    <application
         android:label="meuestoque_protheus"
         android:icon="@mipmap/ic_launcher">
