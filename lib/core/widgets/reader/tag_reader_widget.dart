@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:meuestoque_protheus/core/themes/app_text_styles.dart';
 import 'package:meuestoque_protheus/core/widgets/reader/input_no_keyboard.dart';
@@ -30,6 +31,7 @@ class _TagReaderState extends State<TagReader> {
 
   void _handleChange(String value) {
     final delimitedTags = value.split('EPC');
+    final tagCounter = tags.length;
 
     print('onChange: $value');
 
@@ -38,6 +40,13 @@ class _TagReaderState extends State<TagReader> {
     setState(() {
       tags.addAll(delimitedTags);
     });
+
+    //se adicionar etiqueta, bipa
+    if (tagCounter < tags.length) {
+      final player = AudioCache();
+      player.play('beep.mp3');
+    }
+
     _controller.clear();
     focusNode.requestFocus();
   }

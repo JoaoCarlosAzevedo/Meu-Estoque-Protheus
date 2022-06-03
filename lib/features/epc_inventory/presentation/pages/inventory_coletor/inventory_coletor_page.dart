@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/themes/app_text_styles.dart';

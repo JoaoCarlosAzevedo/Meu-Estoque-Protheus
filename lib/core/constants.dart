@@ -56,27 +56,27 @@ List warehouses = [
   ),
   Warehouse(
     warehouseName: "Armazem 2",
-    streets: [for (var i = 1; i <= 10; i++) i.toString()],
+    streets: [for (var i = 1; i <= 15; i++) i.toString()],
     shelf: ['N'],
   ),
   Warehouse(
-    warehouseName: "Spessato",
+    warehouseName: "Armazem 3",
     streets: [for (var i = 1; i <= 11; i++) i.toString()],
     shelf: ['A', 'B'],
   ),
   Warehouse(
-    warehouseName: "Spessatinho",
-    streets: [for (var i = 1; i <= 7; i++) i.toString()],
+    warehouseName: "Armazem 4",
+    streets: [for (var i = 1; i <= 11; i++) i.toString()],
+    shelf: ['N'],
+  ),
+  Warehouse(
+    warehouseName: "Tintas",
+    streets: [for (var i = 1; i <= 1; i++) i.toString()],
     shelf: ['N'],
   ),
   Warehouse(
     warehouseName: "Sobras",
     streets: [for (var i = 1; i <= 14; i++) i.toString()],
-    shelf: ['N'],
-  ),
-  Warehouse(
-    warehouseName: "Hangar",
-    streets: [for (var i = 1; i <= 11; i++) i.toString()],
     shelf: ['N'],
   ),
 ];

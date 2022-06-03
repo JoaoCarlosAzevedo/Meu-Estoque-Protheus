@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/models/warehouses.dart';
@@ -189,6 +190,8 @@ class _WarehouseFormState extends State<WarehouseForm> {
                               if (element.isNotEmpty) {
                                 if (!widget.aEpcs.contains(element)) {
                                   widget.aEpcs.add(element);
+                                  final player = AudioCache();
+                                  player.play('beep.mp3');
                                 }
                               }
                             }
