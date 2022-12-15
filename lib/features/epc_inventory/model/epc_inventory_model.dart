@@ -10,6 +10,7 @@ class EpcInventory extends Equatable {
   String obs;
   String data;
   List<String> tags;
+
   EpcInventory({
     this.id = 0,
     required this.user,

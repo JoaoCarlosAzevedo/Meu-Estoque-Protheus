@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class MenuItem {
+class MenuItemButtom {
   final String? title, totalStorage;
   final IconData? icon;
   final int? numOfFiles, percentage;
   final Color? color;
   final String route;
 
-  MenuItem(
+  MenuItemButtom(
       {required this.icon,
       this.title,
       this.totalStorage,

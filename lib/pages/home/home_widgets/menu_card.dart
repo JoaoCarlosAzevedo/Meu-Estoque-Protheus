@@ -6,7 +6,7 @@ import 'package:meuestoque_protheus/core/models/menu_model.dart';
 class MenuCard extends StatelessWidget {
   const MenuCard({Key? key, required this.info}) : super(key: key);
 
-  final MenuItem info;
+  final MenuItemButtom info;
 
   @override
   Widget build(BuildContext context) {

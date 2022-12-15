@@ -1,13 +1,16 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_broadcasts/flutter_broadcasts.dart';
 import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/models/warehouses.dart';
 import 'package:meuestoque_protheus/core/themes/app_text_styles.dart';
 import 'package:meuestoque_protheus/features/epc_location/model/epc_locations_model.dart';
 import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse/warehouse_controller.dart';
-import 'package:input_with_keyboard_control/input_with_keyboard_control.dart';
 import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse/widgets/shelf_radio.dart';
 import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse/widgets/streetlist_dropdown.dart';
+
+import '../../../../../../core/widgets/tag_reader/model/tags_model.dart';
 
 class WarehouseForm extends StatefulWidget {
   WarehouseForm({Key? key, required this.info}) : super(key: key);
@@ -28,20 +31,43 @@ class _WarehouseFormState extends State<WarehouseForm> {
   final warehousePageController = WarehousePageController();
 
   final textController = TextEditingController();
-  final focusNode = InputWithKeyboardControlFocusNode();
+
+  final player = AudioCache();
+
+  BroadcastReceiver receiver = BroadcastReceiver(
+    names: <String>[
+      "data.rfid",
+      "data.barcode",
+    ],
+  );
 
   var myMenuItems = <String>[
     'Deletar Todos',
+    'Config. Coletor',
   ];
 
-  void onSelect(item) {
+  void onSelect(item) async {
     switch (item) {
       case 'Deletar Todos':
         setState(() {
           widget.aEpcs.clear();
         });
         break;
+      case 'Config. Coletor':
+        await LaunchApp.openApp(
+          androidPackageName: 'com.rscja.scanner',
+          // openStore: false
+        );
+        break;
     }
+  }
+
+  @override
+  void dispose() {
+    receiver.stop();
+    //streetController.dispose();
+    //shelfController.dispose();
+    super.dispose();
   }
 
   @override
@@ -57,6 +83,9 @@ class _WarehouseFormState extends State<WarehouseForm> {
       warehousePageController.searchEpcLocation(widget.info.warehouseName,
           streetController.text, shelfController.text);
     });
+
+    receiver.start();
+    receiver.messages.listen(onRead);
 
     streetController.addListener(_listener);
     shelfController.addListener(_listener);
@@ -79,6 +108,23 @@ class _WarehouseFormState extends State<WarehouseForm> {
 
     warehousePageController.epcLocationSave(
         warehousePageController.id, location, widget.aEpcs);
+  }
+
+  void onRead(BroadcastMessage message) {
+    if (message.data!["SCAN_STATE"] == "success") {
+      if (message.name == "data.rfid") {
+        addTag(message.data!["data"]);
+      }
+    }
+  }
+
+  void addTag(String tag) {
+    setState(() {
+      if (!widget.aEpcs.contains(tag)) {
+        widget.aEpcs.add(tag);
+        player.play('beep.mp3');
+      }
+    });
   }
 
   @override
@@ -179,42 +225,6 @@ class _WarehouseFormState extends State<WarehouseForm> {
                             ),
                           ],
                         ),
-                      ),
-                      InputWithKeyboardControl(
-                        focusNode: focusNode,
-                        onSubmitted: (value) {
-                          //var aux = value.splitByLength(24, value);
-                          var aux = value.split('EPC');
-                          setState(() {
-                            for (var element in aux) {
-                              if (element.isNotEmpty) {
-                                if (!widget.aEpcs.contains(element)) {
-                                  widget.aEpcs.add(element);
-                                  final player = AudioCache();
-                                  player.play('beep.mp3');
-                                }
-                              }
-                            }
-                          });
-
-                          /*  if (!widget.aEpcs.contains(value)) {
-                            setState(() {
-                              widget.aEpcs.add(value);
-                            });
-                          } */
-                          focusNode.requestFocus();
-                          textController.clear();
-                        },
-                        autofocus: true,
-                        controller: textController,
-                        width: double.infinity,
-                        startShowKeyboard: false,
-                        buttonColorEnabled: Colors.blue,
-                        buttonColorDisabled: Colors.red,
-                        underlineColor: Colors.white,
-                        showUnderline: false,
-                        showButton: false,
-                        style: const TextStyle(color: Colors.white),
                       ),
                       Expanded(
                         child: Padding(

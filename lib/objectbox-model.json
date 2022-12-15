@@ -70,19 +70,66 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "3:4804741283881908841",
+      "lastPropertyId": "8:6384944062382047882",
+      "name": "Tags",
+      "properties": [
+        {
+          "id": "1:251268253974560406",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "3:5690264201178961699",
+          "name": "codeType",
+          "type": 9
+        },
+        {
+          "id": "4:7199641822145025107",
+          "name": "rssi",
+          "type": 9
+        },
+        {
+          "id": "5:919719296878188302",
+          "name": "epc",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "1:1741340868697578070"
+        },
+        {
+          "id": "6:1795580177756387963",
+          "name": "barcode",
+          "type": 9
+        },
+        {
+          "id": "7:7230738141419962109",
+          "name": "data",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "2:612357026391531939",
-  "lastIndexId": "0:0",
-  "lastRelationId": "0:0",
+  "lastEntityId": "3:4804741283881908841",
+  "lastIndexId": "2:1331259166756313319",
+  "lastRelationId": "1:1824231228117589500",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
-  "retiredIndexUids": [],
-  "retiredPropertyUids": [
-    7313092101754780393
+  "retiredIndexUids": [
+    1331259166756313319
   ],
-  "retiredRelationUids": [],
+  "retiredPropertyUids": [
+    7313092101754780393,
+    2409806169199746173,
+    6384944062382047882
+  ],
+  "retiredRelationUids": [
+    1824231228117589500
+  ],
   "version": 1
 }

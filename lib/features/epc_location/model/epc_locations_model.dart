@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:objectbox/objectbox.dart';
 
+import '../../../core/widgets/tag_reader/model/tags_model.dart';
+
 @Entity()
 class EpcLocation extends Equatable {
   int id;
@@ -11,15 +13,21 @@ class EpcLocation extends Equatable {
   String coluna;
   List<String> epcs;
 
-  EpcLocation(
-      {this.id = 0,
-      required this.armazem,
-      required this.rua,
-      required this.coluna,
-      required this.epcs});
+  EpcLocation({
+    this.id = 0,
+    required this.armazem,
+    required this.rua,
+    required this.coluna,
+    required this.epcs,
+  });
 
   @override
-  List<Object> get props => [armazem, rua, coluna, epcs];
+  List<Object> get props => [
+        armazem,
+        rua,
+        coluna,
+        epcs,
+      ];
 
   Map<String, dynamic> toMap() {
     return {

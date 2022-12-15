@@ -11,7 +11,7 @@ const bgColor = Color(0xFF212332);
 const defaultPadding = 16.0;
 
 List menuItens = [
-  MenuItem(
+  MenuItemButtom(
     title: "Invetário RFID",
     numOfFiles: 1328,
     icon: FontAwesomeIcons.clipboardList,
@@ -20,16 +20,7 @@ List menuItens = [
     percentage: 10,
     route: 'epcinventory',
   ),
-  MenuItem(
-    title: "Consultar Endereços",
-    numOfFiles: 5328,
-    icon: FontAwesomeIcons.dolly,
-    totalStorage: "7.3GB",
-    color: const Color(0xFF007EE5),
-    percentage: 78,
-    route: 'error',
-  ),
-  MenuItem(
+  MenuItemButtom(
     title: "Endereçar RFID",
     numOfFiles: 1328,
     icon: FontAwesomeIcons.warehouse,
@@ -38,7 +29,7 @@ List menuItens = [
     percentage: 35,
     route: 'epclocation',
   ),
-  MenuItem(
+  MenuItemButtom(
       title: "Sincronizar RFID",
       numOfFiles: 1328,
       icon: FontAwesomeIcons.clipboardCheck,

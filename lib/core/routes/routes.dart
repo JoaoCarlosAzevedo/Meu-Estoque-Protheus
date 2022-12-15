@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meuestoque_protheus/core/widgets/reader/tag_reader_widget.dart';
 import 'package:meuestoque_protheus/features/epc_inventory/presentation/pages/inventory_coletor/inventory_coletor_page.dart';
 import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse/warehouse_page.dart';
 import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse_sync/warehouse_sync_page.dart';
