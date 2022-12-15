@@ -10,8 +10,7 @@ import 'package:meuestoque_protheus/features/epc_location/presentation/pages/war
 import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse/widgets/shelf_radio.dart';
 import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse/widgets/streetlist_dropdown.dart';
 
-import '../../../../../../core/widgets/tag_reader/model/tags_model.dart';
-
+// ignore: must_be_immutable
 class WarehouseForm extends StatefulWidget {
   WarehouseForm({Key? key, required this.info}) : super(key: key);
   final Warehouse info;
@@ -253,25 +252,5 @@ class _WarehouseFormState extends State<WarehouseForm> {
                     ],
                   );
                 }));
-  }
-}
-
-extension on String {
-  List<String> splitByLength(int length, String string) {
-    var nMax = 0;
-    var char = "";
-    List<String> data = [];
-
-    for (int i = 0; i < string.length; i++) {
-      char += string[i];
-      nMax++;
-      if (nMax == length) {
-        data.add(char);
-        char = "";
-        nMax = 0;
-      }
-    }
-
-    return data;
   }
 }

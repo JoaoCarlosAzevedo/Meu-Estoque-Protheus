@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:meuestoque_protheus/core/database/db.dart';
 import 'package:meuestoque_protheus/features/epc_location/data/epc_location_repository.dart';
 import 'package:meuestoque_protheus/features/epc_location/model/epc_locations_model.dart';
@@ -24,7 +26,7 @@ class WarehouseSyncController {
     if (ret.isRight()) {
       ret.fold((l) => null, (r) => updateEpcLocationDB(r.id, r.epcs));
     } else {
-      ret.fold((l) => print(l.error), (r) => null);
+      ret.fold((l) => log(l.error), (r) => null);
     }
   }
 

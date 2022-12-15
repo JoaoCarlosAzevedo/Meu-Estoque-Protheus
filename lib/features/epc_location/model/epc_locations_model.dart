@@ -3,9 +3,8 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:objectbox/objectbox.dart';
 
-import '../../../core/widgets/tag_reader/model/tags_model.dart';
-
 @Entity()
+// ignore: must_be_immutable
 class EpcLocation extends Equatable {
   int id;
   String armazem;

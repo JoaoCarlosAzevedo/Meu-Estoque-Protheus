@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
+// ignore: must_be_immutable
 class EpcInventory extends Equatable {
   int id;
   String user;
@@ -20,7 +21,7 @@ class EpcInventory extends Equatable {
   });
 
   @override
-  List<Object> get props => [user, obs, data, tags];
+  List<Object> get props => [id, user, obs, data, tags];
 
   Map<String, dynamic> toMap() {
     return {

@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:meuestoque_protheus/core/error/failure.dart';
 
 class EpcInventoryRepository {

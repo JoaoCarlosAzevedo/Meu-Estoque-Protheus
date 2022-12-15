@@ -35,8 +35,6 @@ class _TagReaderState extends State<TagReader> {
   }
 
   void onRead(BroadcastMessage message) {
-    print(message);
-
     if (message.data!["SCAN_STATE"] == "success") {
       if (message.name == "data.rfid") {
         final Tags tag = Tags(
