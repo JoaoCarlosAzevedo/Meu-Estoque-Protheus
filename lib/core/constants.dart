@@ -37,6 +37,22 @@ List menuItens = [
       color: const Color(0xFFFFA113),
       percentage: 35,
       route: 'epclocationsync'),
+  MenuItemButtom(
+      title: "Inventário Produto em Processo",
+      numOfFiles: 1328,
+      icon: FontAwesomeIcons.industry,
+      totalStorage: "2.9GB",
+      color: const Color(0xFFFFA113),
+      percentage: 35,
+      route: 'inventoryfactory'),
+  MenuItemButtom(
+      title: "Inventário Produto Acabado",
+      numOfFiles: 1328,
+      icon: FontAwesomeIcons.dollyFlatbed,
+      totalStorage: "2.9GB",
+      color: const Color(0xFFFFA113),
+      percentage: 35,
+      route: 'inventoryshipment'),
 ];
 
 List warehouses = [

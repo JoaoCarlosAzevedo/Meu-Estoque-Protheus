@@ -75,6 +75,7 @@ class _WarehoueSyncPageState extends State<WarehoueSyncPage> {
                         style: TextStyles.trailingRegular),
                     visualDensity: VisualDensity.compact,
                     trailing: IconButton(
+                      color: Colors.white,
                       icon: const Icon(Icons.refresh),
                       onPressed: () {
                         warehouseSyncController.post(snapshot.data![index]!);

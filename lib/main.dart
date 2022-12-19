@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:meuestoque_protheus/core/constants.dart';
 import 'package:meuestoque_protheus/core/database/db.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'core/routes/routes.dart';
+import 'core/themes/theme.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -26,14 +25,15 @@ class MeuEstoqueApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: AppTheme.defaultTheme,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: router.generateRoute,
-      theme: ThemeData.dark().copyWith(
+      /*      theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: bgColor,
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
             .apply(bodyColor: Colors.white),
         canvasColor: secondaryColor,
-      ),
+      ), */
     );
   }
 

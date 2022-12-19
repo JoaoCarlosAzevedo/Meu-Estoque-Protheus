@@ -39,7 +39,11 @@ class MenuCard extends StatelessWidget {
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
                   //child: const Icon(Icons.access_alarm),
-                  child: Center(child: FaIcon(info.icon)),
+                  child: Center(
+                      child: FaIcon(
+                    info.icon,
+                    color: Colors.white,
+                  )),
                 ),
                 //const Icon(Icons.more_vert, color: Colors.white54)
               ],

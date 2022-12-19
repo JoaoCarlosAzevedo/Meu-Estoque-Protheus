@@ -118,9 +118,10 @@ class _WarehouseFormState extends State<WarehouseForm> {
   }
 
   void addTag(String tag) {
+    final tagNoEnterKey = tag.replaceFirst('\n', '');
     setState(() {
-      if (!widget.aEpcs.contains(tag)) {
-        widget.aEpcs.add(tag);
+      if (!widget.aEpcs.contains(tagNoEnterKey)) {
+        widget.aEpcs.add(tagNoEnterKey);
         player.play('beep.mp3');
       }
     });
@@ -237,6 +238,7 @@ class _WarehouseFormState extends State<WarehouseForm> {
                                 minVerticalPadding: 0,
                                 visualDensity: VisualDensity.compact,
                                 trailing: IconButton(
+                                  color: Colors.red,
                                   icon: const Icon(Icons.delete_forever),
                                   onPressed: () {
                                     setState(() {

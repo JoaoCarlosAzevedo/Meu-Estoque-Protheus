@@ -31,7 +31,9 @@ class _HomePageState extends State<HomePage> {
       body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(defaultPadding),
-          child: MenuGridView(),
+          child: SingleChildScrollView(
+            child: MenuGridView(),
+          ),
         ),
       ),
     );

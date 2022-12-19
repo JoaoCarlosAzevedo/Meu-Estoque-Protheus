@@ -31,7 +31,8 @@ class TagListTile extends StatelessWidget {
   Widget tagType(String type, String rssi) {
     switch (type) {
       case 'RFID':
-        return _iconType(rssiScale(double.parse(tag.rssi)));
+        final double rssiSignal = double.parse(rssi.replaceFirst(',', '.'));
+        return _iconType(rssiScale(rssiSignal));
       case "QR_CODE":
         return const FaIcon(FontAwesomeIcons.qrcode); // do something
       default:

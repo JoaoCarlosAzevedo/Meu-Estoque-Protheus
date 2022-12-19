@@ -4,27 +4,14 @@ import 'package:meuestoque_protheus/features/epc_location/presentation/pages/war
 import 'package:meuestoque_protheus/features/epc_location/presentation/pages/warehouse_sync/warehouse_sync_page.dart';
 import 'package:meuestoque_protheus/pages/home/home_page.dart';
 
-class AppRouter {
-  /*
-  late MachinesRepository machinesRepository;
-  late MachinesCubit machinesCubit;
- */
-  AppRouter() {
-/*     machinesRepository =
-        MachinesRepository(repository: MachinesNetworkService());
-    machinesCubit = MachinesCubit(repository: machinesRepository); */
-  }
+import '../../features/factory_inventory/presentation/pages/factory_inventory/factory_inventory_page.dart';
 
+class AppRouter {
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case "/":
         return MaterialPageRoute(builder: (context) => const HomePage());
-      /* MaterialPageRoute(
-          builder: (_) => BlocProvider.value(
-            value: machinesCubit,
-            child: MachinesPage(),
-          ),
-        ); */
+
       case "/epclocation":
         return MaterialPageRoute(builder: (context) => const WarehousePage());
 
@@ -35,6 +22,14 @@ class AppRouter {
       case "/epcinventory":
         return MaterialPageRoute(
             builder: (context) => const InventoryColetorPage());
+
+      case "/inventoryfactory":
+        return MaterialPageRoute(
+            builder: (context) => const FactoryInventoryPage());
+
+      case "/inventoryshipment":
+        return MaterialPageRoute(
+            builder: (context) => const DefaultErrorPage());
 
       default:
         return MaterialPageRoute(
